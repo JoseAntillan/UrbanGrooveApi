@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Bsale API</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+
+
+
+</head>
+
+<body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+
+    <script>
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('#mode').addEventListener('click',()=>{
+                document.querySelector('html').classList.toggle('dark');
+            })
+        });
+
+
+    </script>
+
+    <div id="wrapper">
+
+
+
+        <div class="container">
+
+            <section id="top" class="section docs-heading">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="big-title text-center">
+                            <h1>API: Generador de progresiones de acordes</h1>
+                            <p class="lead">Created by <a href="https://github.com/JoseAntillan" target="_blank">Jose Antillan</a></p>
+                        </div>
+                        <!-- end title -->
+                    </div>
+                    <!-- end 12 -->
+                </div>
+                <!-- end row -->
+
+                <hr>
+
+            </section>
+            <!-- end section -->
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
+                        <ul class="nav">
+                            <li><a href="#introduccion">Introduccion</a></li>
+                            <li><a href="#line1">Empecemos</a></li>
+                            <li><a href="#ejemplos">Ejemplos</a></li>
+                   
+
+                            
+                        </ul>
+                    </nav >
+                </div>
+                <div class="col-md-9">
+                    <section class="welcome">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                               <h2 class="dark-text" id = "introduccion">Introducción<hr></h2>
+                                <div class="row">
+
+                                    <div class="col-md-12 full">
+                               
+                                        <hr>
+                                        <div>
+                                            <p>Una api musical facil de usar, esta genera una progresion de acordes musicales en 4/4 (en formato JSON). Se basa en una mezcla de azar y de teoria musical moderna para poder generar una base original para tu proxima composicion musical. 
+                                                <br>
+                                                <br>
+                                                Puedes usarla entregandole la nota raiz, el acorde que quieres que sea el primero en la progresion, o simplemente dejando que el azar cumpla estos requisitos.
+                                                
+                                            
+                                            </p>
+                                            <p>
+                                                <strong>Formato de respuesta:</strong>
+                                                <br>
+                                                La api nos entrega un objeto JSON con los siguientes atributos:
+
+                                            
+                                            
+                                            
+                                            </p>
+
+                                            <ol>
+                                                <li>Acordes(Contiene cada acorde de la progresion, que a su vez cada acorde contiene las notas que le pertenecen)</li>
+                                                <li>Grados (Contiene los numeros de la progresion y su tipo, ej: Im7-IVm-7d)</li>
+                                                <li>Numeros (Contiene los acordes pero en formator numeros enteros, el numero representa el codigo midi de cada nota)</li>
+                                                <li>Root(Contiene el nombre de la nota raiz de nuestra progresion)</li>
+                                              </ol>
+                                      
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end row -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="line1" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Empecemos<hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Dependiendo de tus necesidades puedes optar por agregar parametros o obtenerlos al azar</p>
+                             
+                                
+                                <strong>La API permite solicitudes GET a estos endpoint:</strong>
+                                <br>
+
+                                <table>
+                                    <tr>
+                                      <th>Endpoint</th>
+                                   
+                                      <th>Respuesta</th>
+                                   
+                                    </tr>
+                                    <tr>
+                                      <td><strong><code>https://chordgeneratormidi.herokuapp.com/api/v1/0/0</code> </strong> </td>
+                                     
+                                      <td>Progresion con nota raiz y primer acorde al azar</td>
+                                    
+                                    </tr>
+                                    <tr>
+                                        <td><strong><code>https://chordgeneratormidi.herokuapp.com/api/v1/-3/0</code> </strong> </td>
+                                    
+                                      <td>Progresion con nota raiz en "A" <a href="#notasraiz">Ver tabla de notas raiz</a></td>
+                              
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong><code>https://chordgeneratormidi.herokuapp.com/api/v1/-3/4</code> </strong> </td>
+                                    
+                                      <td>Progresion con nota raiz en "A" y forzar el primer grado de la progresion para que sea el grado IV <a href="#GRADOS">Ver tabla de grados</a></td>
+                              
+                                    </tr>
+                                  </table>
+
+
+                               <!-- end col -->
+
+                                <h4 id="notasraiz">Tabla de notas raiz</h4>
+
+                                    <table>
+                                        <tr>
+                                          <th>Nota        <BR>          </th>
+                                            <th> </th>
+                                       
+                                          <th>  Numero</th>
+                                       
+                                        </tr>
+                                        <tr>
+                                            <td><strong>F#</strong> </td>
+                                           
+                                            <td>-6</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                        <tr>
+                                            <td><strong>G</strong> </td>
+                                           
+                                            <td>-5</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                        <tr>
+                                            <td><strong>G#</strong> </td>
+                                           
+                                            <td>-4</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                        <tr>
+                                            <td><strong>A</strong> </td>
+                                           
+                                            <td>-3</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                        <tr>
+                                            <td><strong>A#</strong> </td>
+                                           
+                                            <td>-2</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                        <tr>
+                                            <td><strong>B</strong> </td>
+                                           
+                                            <td>-1</td>
+                                          
+                                          </tr>
+   
+                                        <tr>
+                                          <td><strong>C</strong> </td>
+                                         
+                                          <td>1</td>
+                                        
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>C#</strong> </td>
+                                           
+                                            <td>2</td>
+                                          
+                                          </tr>
+
+                                          <tr>
+                                            <td><strong>D</strong> </td>
+                                           
+                                            <td>3</td>
+                                          
+                                          </tr>
+
+                                          
+                                          <tr>
+                                            <td><strong>D#</strong> </td>
+                                           
+                                            <td>4</td>
+                                          
+                                          </tr>
+                                          <tr>
+                                            <td><strong>E</strong> </td>
+                                           
+                                            <td>5</td>
+                                          
+                                          </tr>
+                                          <tr>
+                                            <td><strong>F</strong> </td>
+                                           
+                                            <td>6</td>
+                                          
+                                          </tr>
+   
+ 
+                                      </table>
+
+                                      <h4 id="GRADOS">Tabla de grados</h4>
+
+                                        <table >
+                                            <tr>
+                                              <th>Grado        <BR>          </th>
+                                                <th> </th>
+                                           
+                                              <th>  Numero</th>
+                                           
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Im</strong> </td>
+                                               
+                                                <td>1</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                            <tr>
+                                                <td><strong>IIdim</strong> </td>
+                                               
+                                                <td>2</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                            <tr>
+                                                <td><strong>IIIM</strong> </td>
+                                               
+                                                <td>3</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                            <tr>
+                                                <td><strong>IVm</strong> </td>
+                                               
+                                                <td>4</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                            <tr>
+                                                <td><strong>Vm</strong> </td>
+                                               
+                                                <td>5</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                            <tr>
+                                                <td><strong>VIM</strong> </td>
+                                               
+                                                <td>6</td>
+                                              
+                                              </tr>
+       
+                                            <tr>
+                                              <td><strong>VIIM</strong> </td>
+                                             
+                                              <td>7</td>
+                                            
+                                            </tr>
+    
+                                           
+     
+                                          </table>
+                        
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    
+
+
+
+
+
+
+
+
+
+                        <H1 id="ejemplos">Ejemplos:</H1>
+
+                        <h3>Progresion en F# y primer grado IV</h3>
+                        <p>Necesitamos una progresion que tenga la nota raiz en <strong>F#</strong> . Tambien a su vez queremos que el primer grado de la progresion sea el grado <strong>IV</strong> 
+                        . Deberiamos configurar el endpoint de la siguiente manera:<br>
+                        <code>https://chordgeneratormidi.herokuapp.com/api/v1/-6/4</code>
+                        </p>
+
+                        <h3>Progresion en B</h3>
+                        <p>Necesitamos una progresion que tenga la nota raiz en <strong>D#</strong>. tambien queremos que el primer grado de la progresion sea uno al azar
+                        . Deberiamos configurar el endpoint de la siguiente manera:<br>
+                        <code>/api/v1/4/0</code>
+                        </p>
+
+
+                        <h3>Primer grado VIIm</h3>
+                        <p>Necesitamos una progresion con una nota raiz al azar. pero queremos que el primer grado de la progresion sea el <strong>VIIm</strong>
+                        . Deberiamos configurar el endpoint de la siguiente manera:<br>
+                        <code>https://chordgeneratormidi.herokuapp.com/api/v1/0/7</code>
+                        </p>
+
+                        <h3>Totalmente al azar</h3>
+                        <p>Necesitamos una progresion, cualquiera sea esta. nos da igual el primer grado y la nota raiz.
+                        . Deberiamos configurar el endpoint de cualquiera de las siguientes maneras:<br>
+                        <code>https://chordgeneratormidi.herokuapp.com/api/v1/0/0</code><br>
+                        <code>https://chordgeneratormidi.herokuapp.com/api/v1/0</code><br>
+                        <code>https://chordgeneratormidi.herokuapp.com/api/v1</code>
+                        </p>
+                        
+                    </section>
+                    <!-- end section -->
+
+
+
+                    
+
+
+       
+                    
+
+                 
+                     
+                </div>
+                <!-- // end .col -->
+
+            </div>
+            <!-- // end .row -->
+
+        </div>
+        <!-- // end container -->
+
+    </div>
+    <!-- end wrapper -->
+
+
+  
+
+</body>
+
+</html>
